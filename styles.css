@@ -1,0 +1,379 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fae1dd;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.valentines {
+  position: relative;
+  cursor: pointer;
+  animation: up 3s linear infinite;
+}
+
+@keyframes up {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+/* Envelope */
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background-color: #f08080;
+}
+.envelope:before {
+  content: "";
+  background-color: #f08080;
+  position: absolute;
+  width: 212px;
+  height: 212px;
+  transform: rotate(45deg);
+  top: -105px;
+  left: 44px;
+  border-radius: 30px 0 0 0;
+}
+
+/* Card (Inside the envelope) */
+.card {
+  position: absolute;
+  background-color: #eae2b7;
+  width: 270px;
+  height: 170px;
+  top: 5px;
+  left: 15px;
+  box-shadow: -5px 5px 100px rgba(0,0,0,0);
+}
+.card:before {
+  content: "";
+  position: absolute;
+  border: 3px dotted #003049;
+  width: 240px;
+  height: 140px;
+  left: 12px;
+  top: 12px;
+}
+.text {
+  position: absolute;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 28px;
+  text-align: center;
+  line-height: 25px;
+  top: 19px;
+  left: 85px;
+  color: #003049;
+}
+.heart {
+  background-color: #d62828;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 110px;
+  left: 105px;
+  transform: rotate(-45deg);
+}
+.heart:before, .heart:after {
+  content: "";
+  background-color: #d62828;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+}
+.heart:before {
+  top: -15px;
+  left: 0;
+}
+.heart:after {
+  left: 15px;
+  top: 0;
+}
+
+/* Floating hearts */
+.hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.one, .two, .three, .four, .five {
+  background-color: red;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin: 0 10px;
+  position: relative;
+  transform: rotate(-45deg);
+  top: 50px;
+}
+.one:before, .one:after, 
+.two:before, .two:after, 
+.three:before, .three:after, 
+.four:before, .four:after, 
+.five:before, .five:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
+.one:before, .two:before, .three:before, .four:before, .five:before {
+  top: -5px;
+  left: 0;
+}
+.one:after, .two:after, .three:after, .four:after, .five:after {
+  top: 0;
+  left: 5px;
+}
+.one {
+  left: 10px;
+  animation: heartAnim 1s ease-out infinite;
+}
+.two {
+  left: 30px;
+  animation: heartAnim 1.25s ease-out infinite;
+}
+.three {
+  left: 50px;
+  animation: heartAnim 1.5s ease-out infinite;
+}
+.four {
+  left: 70px;
+  animation: heartAnim 2.3s ease-out infinite;
+}
+.five {
+  left: 90px;
+  animation: heartAnim 1.7s ease-out infinite;
+}
+@keyframes heartAnim {
+  0% { top: 50px; opacity: 1; }
+  100% { top: 0px; opacity: 0; }
+}
+
+/* Front */
+.front {
+  position: absolute;
+  border-right: 180px solid #f4978e;
+  border-top: 95px solid transparent;
+  border-bottom: 100px solid transparent;
+  left: 120px;
+  top: 5px;
+  width: 0;
+  height: 0;
+  z-index: 10;
+}
+.front:before {
+  position: absolute;
+  content: "";
+  border-left: 300px solid #f8ad9d;
+  border-top: 195px solid transparent;
+  left: -120px;
+  top: -95px;
+  width: 0;
+  height: 0;
+}
+
+/* Shadow */
+.shadow {
+  position: absolute;
+  width: 330px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.03);
+  bottom: -10px;
+  left: -15px;
+  z-index: -1;
+}
+
+
+.valentines:hover .card {
+  transform: translateY(-60px) rotate(-5deg);
+  opacity: 0.8;
+}
+
+/* Letter Animation */
+.card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom center;
+  z-index: 1;
+}
+
+/* Click Animation */
+.card.open {
+  animation: letterReveal 1.5s ease-out forwards;
+}
+
+@keyframes letterReveal {
+  0% {
+    transform: translateY(0) scaleY(0.3);
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateY(-150px) scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(1.2);
+  }
+}
+
+/* Letter Content */
+.text {
+  transition: all 0.5s 1s;
+  opacity: 0;
+}
+
+.card.open .text {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Envelope Position Adjustment */
+.valentines.open {
+  transform: translateY(-50px);
+}
+
+/* Outer Message (Visible by default) */
+.outer-message {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 28px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #d62828;
+  transition: all 0.3s;
+}
+
+/* Inner Message (Hidden by default) */
+.inner-message {
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  padding: 15px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.5s;
+  font-family: 'Courier New', monospace;
+  color: #2d3436;
+}
+
+/* When card is opened */
+.card.open .outer-message {
+  opacity: 0;
+  transform: translate(-50%, -110px);
+}
+
+.card.open .inner-message {
+  opacity: 1;
+  transform: scaleY(1);
+  transition-delay: 0.3s;
+}
+
+/* Card Animation */
+.card.open {
+  animation: unfold 1s forwards;
+}
+
+@keyframes unfold {
+  0% { transform: translateY(0); height: 170px; }
+  50% { transform: translateY(-100px); height: 250px; }
+  100% { transform: translateY(-200px); height: 400px; }
+}
+
+/* BUTTON STYLES */
+.gift-button {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+/* DISABLED STATE */
+.gift-button:disabled {
+  background-color: #cccccc !important;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+/* ENABLED STATE */
+.gift-button.enabled {
+  background-color: #ff3366;
+  color: white;
+  box-shadow: 0 4px 8px rgba(255, 51, 102, 0.3);
+}
+
+.gift-button.enabled:hover {
+  background-color: #ff0066;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Add this to your existing CSS */
+
+/* BUTTON STYLES */
+.gift-button {
+  position: flex;
+  bottom: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.gift-button.enabled {
+  background-color: #ff3366;
+  color: white;
+  box-shadow: 0 4px 8px rgba(255, 51, 102, 0.3);
+  cursor: pointer;
+}
+
+.gift-button.enabled:hover {
+  background-color: #ff0066;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Make sure envelope container is positioned relatively */
+.container {
+  position: relative;
+  height: 100vh;
+}
+
